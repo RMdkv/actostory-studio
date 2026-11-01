@@ -12,3 +12,4 @@
 - Keep workout UI and logic in the Treinos feature modules; reuse the existing authenticated route and shell to avoid changes to other sections.
 - Store workout days and session snapshots as validated JSON in owner-scoped Cloud tables; snapshots preserve history when a plan changes or is deleted.
 - Workout AI runs only through authenticated server functions and server-only Responses helpers, selecting exercises from the shared catalog so generated plans remain editable and illustrated.
+- Guest demo mode uses anonymous Cloud sessions; restrictive RLS (public.is_guest()) blocks guests from social writes and other users' data, and workout AI rejects anonymous claims server-side.
