@@ -9,6 +9,7 @@ import { EmptyState } from "@/components/acto/EmptyState";
 import { supabase } from "@/integrations/supabase/client";
 import { fetchFeed, fetchStories, timeAgo, uploadMedia, type Author } from "@/lib/social";
 import { Avatar } from "./comunidade";
+import { demoPosts } from "@/lib/guest";
 
 export const Route = createFileRoute("/_authenticated/inicio")({
   head: () => ({ meta: [{ title: "Início — ACTO" }] }),
@@ -244,6 +245,33 @@ function StoryViewer({ group, isMine, onNext, onClose, onDeleted }: {
       <button type="button" aria-label="Próximo" onClick={advance} className="mx-auto flex w-full max-w-lg flex-1 items-center justify-center px-2 pb-6">
         <img src={item.url} alt="" className="max-h-full w-full rounded-2xl object-contain" />
       </button>
+    </div>
+  );
+}
+
+function GuestFeed() {
+  return (
+    <div className="space-y-4">
+      <div className="rounded-3xl border border-border bg-card p-4 text-sm text-muted-foreground">
+        Estas publicações são exemplos. Crie uma conta para publicar, curtir e postar stories.
+      </div>
+      <ul className="space-y-4">
+        {demoPosts.map((p) => (
+          <li key={p.id} className="rounded-3xl border border-border bg-card p-4">
+            <div className="flex items-center gap-3">
+              <Avatar url={null} name={p.name} />
+              <div>
+                <p className="text-sm font-semibold">{p.name}</p>
+                <p className="text-xs text-muted-foreground">@{p.username} · {p.ago}</p>
+              </div>
+            </div>
+            <p className="mt-3 text-sm">{p.caption}</p>
+            <p className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Heart className="h-4 w-4" /> {p.likes}
+            </p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

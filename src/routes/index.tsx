@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Dumbbell, Footprints, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ActoLogo } from "@/components/acto/Logo";
+import { GuestButton } from "@/components/acto/GuestButton";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/")({
