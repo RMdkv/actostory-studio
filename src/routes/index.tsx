@@ -56,6 +56,7 @@ function Welcome() {
         <Button asChild variant="soft" size="xl">
           <Link to="/auth" search={{ mode: "signin" }}>Já tenho conta</Link>
         </Button>
+        <GuestButton />
       </div>
     </div>
   );
