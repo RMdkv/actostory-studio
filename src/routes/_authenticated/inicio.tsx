@@ -46,6 +46,8 @@ function Inicio() {
     }
   }
 
+  if (user.is_anonymous) return <GuestFeed />;
+
   return (
     <div className="space-y-6">
       <section aria-label="Stories" className="flex gap-4 overflow-x-auto pb-1">
