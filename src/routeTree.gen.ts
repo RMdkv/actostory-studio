@@ -10,33 +10,143 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AuthenticatedComunidadeRouteImport } from './routes/_authenticated/comunidade'
+import { Route as AuthenticatedInicioRouteImport } from './routes/_authenticated/inicio'
+import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated/perfil'
+import { Route as AuthenticatedRunRouteImport } from './routes/_authenticated/run'
+import { Route as AuthenticatedTreinosRouteImport } from './routes/_authenticated/treinos'
+import { Route as AuthenticatedUUsernameRouteImport } from './routes/_authenticated/u.$username'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedComunidadeRoute = AuthenticatedComunidadeRouteImport.update({
+  id: '/comunidade',
+  path: '/comunidade',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedInicioRoute = AuthenticatedInicioRouteImport.update({
+  id: '/inicio',
+  path: '/inicio',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPerfilRoute = AuthenticatedPerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedRunRoute = AuthenticatedRunRouteImport.update({
+  id: '/run',
+  path: '/run',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTreinosRoute = AuthenticatedTreinosRouteImport.update({
+  id: '/treinos',
+  path: '/treinos',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedUUsernameRoute = AuthenticatedUUsernameRouteImport.update({
+  id: '/u/$username',
+  path: '/u/$username',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/comunidade': typeof AuthenticatedComunidadeRoute
+  '/inicio': typeof AuthenticatedInicioRoute
+  '/perfil': typeof AuthenticatedPerfilRoute
+  '/run': typeof AuthenticatedRunRoute
+  '/treinos': typeof AuthenticatedTreinosRoute
+  '/u/$username': typeof AuthenticatedUUsernameRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/comunidade': typeof AuthenticatedComunidadeRoute
+  '/inicio': typeof AuthenticatedInicioRoute
+  '/perfil': typeof AuthenticatedPerfilRoute
+  '/run': typeof AuthenticatedRunRoute
+  '/treinos': typeof AuthenticatedTreinosRoute
+  '/u/$username': typeof AuthenticatedUUsernameRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/comunidade': typeof AuthenticatedComunidadeRoute
+  '/_authenticated/inicio': typeof AuthenticatedInicioRoute
+  '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
+  '/_authenticated/run': typeof AuthenticatedRunRoute
+  '/_authenticated/treinos': typeof AuthenticatedTreinosRoute
+  '/_authenticated/u/$username': typeof AuthenticatedUUsernameRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/comunidade'
+    | '/inicio'
+    | '/perfil'
+    | '/run'
+    | '/treinos'
+    | '/u/$username'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/comunidade'
+    | '/inicio'
+    | '/perfil'
+    | '/run'
+    | '/treinos'
+    | '/u/$username'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/reset-password'
+    | '/_authenticated/comunidade'
+    | '/_authenticated/inicio'
+    | '/_authenticated/perfil'
+    | '/_authenticated/run'
+    | '/_authenticated/treinos'
+    | '/_authenticated/u/$username'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +158,98 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/comunidade': {
+      id: '/_authenticated/comunidade'
+      path: '/comunidade'
+      fullPath: '/comunidade'
+      preLoaderRoute: typeof AuthenticatedComunidadeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/inicio': {
+      id: '/_authenticated/inicio'
+      path: '/inicio'
+      fullPath: '/inicio'
+      preLoaderRoute: typeof AuthenticatedInicioRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/perfil': {
+      id: '/_authenticated/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof AuthenticatedPerfilRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/run': {
+      id: '/_authenticated/run'
+      path: '/run'
+      fullPath: '/run'
+      preLoaderRoute: typeof AuthenticatedRunRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/treinos': {
+      id: '/_authenticated/treinos'
+      path: '/treinos'
+      fullPath: '/treinos'
+      preLoaderRoute: typeof AuthenticatedTreinosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/u/$username': {
+      id: '/_authenticated/u/$username'
+      path: '/u/$username'
+      fullPath: '/u/$username'
+      preLoaderRoute: typeof AuthenticatedUUsernameRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedComunidadeRoute: typeof AuthenticatedComunidadeRoute
+  AuthenticatedInicioRoute: typeof AuthenticatedInicioRoute
+  AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
+  AuthenticatedRunRoute: typeof AuthenticatedRunRoute
+  AuthenticatedTreinosRoute: typeof AuthenticatedTreinosRoute
+  AuthenticatedUUsernameRoute: typeof AuthenticatedUUsernameRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedComunidadeRoute: AuthenticatedComunidadeRoute,
+  AuthenticatedInicioRoute: AuthenticatedInicioRoute,
+  AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
+  AuthenticatedRunRoute: AuthenticatedRunRoute,
+  AuthenticatedTreinosRoute: AuthenticatedTreinosRoute,
+  AuthenticatedUUsernameRoute: AuthenticatedUUsernameRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

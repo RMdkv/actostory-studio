@@ -1,0 +1,11 @@
+[
+  {"capability":"code","source":"actostory-main.zip","outcome":"migrate","status":"done","next_action":null},
+  {"capability":"schema","source":"drizzle migrations","outcome":"migrate","status":"done","next_action":null},
+  {"capability":"storage bucket media","source":"private bucket","outcome":"migrate","status":"done","next_action":null},
+  {"capability":"auth (email, Google, Lovable)","source":"Cloud auth","outcome":"migrate","status":"configured","next_action":"verify sign-in in preview"},
+  {"capability":"AI workout plans","source":"Lovable AI","outcome":"keep","status":"implemented","next_action":"verify with signed-in user"},
+  {"capability":"records","source":"old Cloud database","outcome":"migrate","status":"pending","next_action":"user exports tables as CSV"},
+  {"capability":"users","source":"old Cloud auth","outcome":"migrate","status":"pending","next_action":"user exports users list"},
+  {"capability":"uploaded photos","source":"old media bucket","outcome":"migrate","status":"pending","next_action":"user provides files"},
+  {"capability":"logo","source":"old project asset","outcome":"migrate","status":"replaced with app icon","next_action":"user re-uploads original logo if different"}
+]
