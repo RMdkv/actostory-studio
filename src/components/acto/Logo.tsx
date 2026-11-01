@@ -1,12 +1,11 @@
-import logo from "@/assets/acto-logo.png.asset.json";
 import { cn } from "@/lib/utils";
 
-/** Full ACTO logo (symbol + name), cropped from the square artwork. */
+/** Full ACTO logo (symbol + name), cropped from the artwork. */
 export function ActoLogo({ className }: { className?: string }) {
   return (
     <div className={cn("relative aspect-[3/2] overflow-hidden", className)}>
       <img
-        src={logo.url}
+        src="/Logotipo_futurista_ACTO_em_neon_verde.png"
         alt="ACTO"
         className="absolute left-1/2 top-1/2 w-[160%] max-w-none -translate-x-1/2 -translate-y-1/2"
       />
