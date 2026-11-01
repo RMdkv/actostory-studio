@@ -8,6 +8,13 @@
       "when": 1793504275486,
       "tag": "0000_import_actostory_schema",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793504803847,
+      "tag": "0001_guest_demo_mode",
+      "breakpoints": true
     }
   ]
 }

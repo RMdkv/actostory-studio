@@ -249,6 +249,7 @@ export type Database = {
     Functions: {
       can_view_author: { Args: { _author: string }; Returns: boolean }
       get_profile_bio: { Args: { _profile_id: string }; Returns: string }
+      is_guest: { Args: never; Returns: boolean }
       username_available: { Args: { _username: string }; Returns: boolean }
     }
     Enums: {
