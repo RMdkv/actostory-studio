@@ -7,6 +7,7 @@ import { catalog, questionnaireSchema, validateDays } from "./model";
 const generatedSchema=z.object({name:z.string(),explanation:z.string(),days:z.array(z.object({name:z.string(),exercises:z.array(z.object({catalogId:z.string(),sets:z.number(),reps:z.string(),rest:z.number()}))}))});
 export const workoutAI = createServerFn({method:"POST"}).middleware([requireSupabaseAuth]).inputValidator(z.object({mode:z.enum(["generate","ask"]),questionnaire:questionnaireSchema.nullable(),planId:z.string().uuid().nullable(),question:z.string().max(2000)})).handler(async({data,context})=>{
  const request=getRequest();
+ if((context.claims as {is_anonymous?:boolean}).is_anonymous) return new Response(JSON.stringify({error:"A IA está disponível apenas para contas cadastradas. Crie sua conta grátis para usar."}),{status:403,headers:{"Content-Type":"application/json"}});
  const {data:blocked,error:blockError}=await context.supabase.from("workout_ai_access").select("denial_message").eq("user_id",context.userId).maybeSingle();
  if(blockError) throw new Error(blockError.message);
  if(blocked) return new Response(JSON.stringify({error:blocked.denial_message}),{status:403,headers:{"Content-Type":"application/json"}});
