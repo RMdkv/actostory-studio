@@ -14,13 +14,242 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      post_likes: {
+        Row: {
+          created_at: string
+          post_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          post_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          post_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_likes_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "post_likes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      posts: {
+        Row: {
+          author_id: string
+          caption: string | null
+          created_at: string
+          id: string
+          image_path: string | null
+        }
+        Insert: {
+          author_id: string
+          caption?: string | null
+          created_at?: string
+          id?: string
+          image_path?: string | null
+        }
+        Update: {
+          author_id?: string
+          caption?: string | null
+          created_at?: string
+          id?: string
+          image_path?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "posts_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          is_private: boolean
+          updated_at: string
+          username: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          display_name?: string | null
+          id: string
+          is_private?: boolean
+          updated_at?: string
+          username: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          is_private?: boolean
+          updated_at?: string
+          username?: string
+        }
+        Relationships: []
+      }
+      stories: {
+        Row: {
+          author_id: string
+          created_at: string
+          expires_at: string
+          id: string
+          image_path: string
+        }
+        Insert: {
+          author_id: string
+          created_at?: string
+          expires_at?: string
+          id?: string
+          image_path: string
+        }
+        Update: {
+          author_id?: string
+          created_at?: string
+          expires_at?: string
+          id?: string
+          image_path?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stories_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      workout_ai_access: {
+        Row: {
+          blocked_at: string
+          denial_message: string
+          user_id: string
+        }
+        Insert: {
+          blocked_at?: string
+          denial_message: string
+          user_id: string
+        }
+        Update: {
+          blocked_at?: string
+          denial_message?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      workout_plans: {
+        Row: {
+          created_at: string
+          days: Json
+          id: string
+          name: string
+          questionnaire: Json
+          source: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          days?: Json
+          id?: string
+          name: string
+          questionnaire?: Json
+          source?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          days?: Json
+          id?: string
+          name?: string
+          questionnaire?: Json
+          source?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      workout_sessions: {
+        Row: {
+          created_at: string
+          day_name: string
+          exercises: Json
+          finished_at: string | null
+          id: string
+          notes: string
+          plan_id: string | null
+          plan_name: string
+          started_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          day_name: string
+          exercises?: Json
+          finished_at?: string | null
+          id?: string
+          notes?: string
+          plan_id?: string | null
+          plan_name: string
+          started_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          day_name?: string
+          exercises?: Json
+          finished_at?: string | null
+          id?: string
+          notes?: string
+          plan_id?: string | null
+          plan_name?: string
+          started_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "workout_sessions_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "workout_plans"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      can_view_author: { Args: { _author: string }; Returns: boolean }
+      get_profile_bio: { Args: { _profile_id: string }; Returns: string }
+      username_available: { Args: { _username: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
