@@ -10,6 +10,7 @@ import { Switch } from "@/components/ui/switch";
 import { PageTitle } from "@/components/acto/AppShell";
 import { supabase } from "@/integrations/supabase/client";
 import { normalizeUsername, signOut, USERNAME_RE } from "@/lib/auth";
+import { useTheme } from "@/lib/theme";
 
 export const Route = createFileRoute("/_authenticated/perfil")({
   head: () => ({ meta: [{ title: "Perfil — ACTO" }] }),
@@ -39,6 +40,7 @@ function Perfil() {
   const [bio, setBio] = useState("");
   const [priv, setPriv] = useState(false);
   const [busy, setBusy] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     if (!profile) return;
@@ -96,6 +98,17 @@ function Perfil() {
         </div>
         <Button type="submit" variant="hero" size="xl" className="w-full" disabled={busy}>Salvar</Button>
       </form>
+      <div className="mt-4 flex items-center justify-between rounded-3xl border border-border bg-card p-5">
+        <div>
+          <Label htmlFor="tema">Modo claro</Label>
+          <p className="mt-1 text-sm text-muted-foreground">Troca a aparência do app neste aparelho.</p>
+        </div>
+        <Switch
+          id="tema"
+          checked={theme === "light"}
+          onCheckedChange={(on) => setTheme(on ? "light" : "dark")}
+        />
+      </div>
       <Button variant="soft" size="xl" className="mt-4 w-full" onClick={logout}>Sair</Button>
     </>
   );
