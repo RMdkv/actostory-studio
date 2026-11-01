@@ -1,7 +1,9 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
 import { Home, Dumbbell, Users, User, Footprints } from "lucide-react";
 import type { ReactNode } from "react";
 import { ActoWordmark } from "./Logo";
+import { signOut } from "@/lib/auth";
 
 const tabs = [
   { to: "/inicio", label: "Início", icon: Home },
@@ -11,13 +13,35 @@ const tabs = [
   { to: "/perfil", label: "Perfil", icon: User },
 ] as const;
 
-export function AppShell({ children }: { children: ReactNode }) {
+export function AppShell({ children, guest = false }: { children: ReactNode; guest?: boolean }) {
+  const qc = useQueryClient();
+  const navigate = useNavigate();
+  async function leave(to: "home" | "signup") {
+    await signOut(qc);
+    navigate(to === "home" ? { to: "/", replace: true } : { to: "/auth", search: { mode: "signup" }, replace: true });
+  }
   return (
     <div className="mx-auto flex min-h-screen max-w-lg flex-col">
-      <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-border bg-background/85 px-5 backdrop-blur-md">
-        <Link to="/inicio" aria-label="ACTO, início">
-          <ActoWordmark />
-        </Link>
+      <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur-md">
+        <div className="flex h-14 items-center justify-between px-5">
+          <Link to="/inicio" aria-label="ACTO, início">
+            <ActoWordmark />
+          </Link>
+          {guest && (
+            <span className="rounded-full border border-primary/40 px-2.5 py-1 text-[11px] font-semibold text-primary">
+              Modo de demonstração
+            </span>
+          )}
+        </div>
+        {guest && (
+          <div className="flex items-center justify-between gap-2 border-t border-border px-5 py-2 text-xs text-muted-foreground">
+            <span>Você está testando sem cadastro.</span>
+            <div className="flex gap-3">
+              <button type="button" className="font-semibold text-primary" onClick={() => leave("signup")}>Criar conta</button>
+              <button type="button" className="hover:text-foreground" onClick={() => leave("home")}>Sair do teste</button>
+            </div>
+          </div>
+        )}
       </header>
       <main className="flex-1 px-4 pb-28 pt-5">{children}</main>
       <nav

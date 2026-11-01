@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ActoLogo } from "@/components/acto/Logo";
+import { GuestButton } from "@/components/acto/GuestButton";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 import { normalizeUsername, USERNAME_RE } from "@/lib/auth";
@@ -159,6 +160,7 @@ function AuthPage() {
                   <button type="button" className="lovable-auth-button w-full" onClick={() => social("lovable")}>
                     Continue with Lovable
                   </button>
+                  <GuestButton />
                 </div>
               </>
             )}

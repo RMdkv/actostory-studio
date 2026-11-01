@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Dumbbell, Footprints, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ActoLogo } from "@/components/acto/Logo";
+import { GuestButton } from "@/components/acto/GuestButton";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/")({
@@ -56,6 +57,7 @@ function Welcome() {
         <Button asChild variant="soft" size="xl">
           <Link to="/auth" search={{ mode: "signin" }}>Já tenho conta</Link>
         </Button>
+        <GuestButton />
       </div>
     </div>
   );

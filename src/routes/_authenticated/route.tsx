@@ -9,9 +9,14 @@ export const Route = createFileRoute("/_authenticated")({
     if (!data.user) throw redirect({ to: "/auth" });
     return { user: data.user };
   },
-  component: () => (
-    <AppShell>
+  component: Layout,
+});
+
+function Layout() {
+  const { user } = Route.useRouteContext();
+  return (
+    <AppShell guest={user.is_anonymous === true}>
       <Outlet />
     </AppShell>
-  ),
-});
+  );
+}
