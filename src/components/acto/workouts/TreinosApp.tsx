@@ -129,9 +129,9 @@ export function TreinosApp() {
       const res = await workoutAI({ data: { mode: "generate", questionnaire: answers, planId: null, question: "" } });
       await consumeWorkoutAI(res, (event) => {
         if (aiCancelled.current) return;
-        const plan = event.plan as { name: string; days: WorkoutDay[]; questionnaire: Answers } | undefined;
+        const plan = event["plan"] as { name: string; days: WorkoutDay[]; questionnaire: Answers } | undefined;
         if (plan) {
-          setAiNote(typeof event.explanation === "string" ? event.explanation : null);
+          setAiNote(typeof event["explanation"] === "string" ? (event["explanation"] as string) : null);
           setView({ name: "editor", draft: { id: null, name: plan.name, source: "ai", days: plan.days, questionnaire: plan.questionnaire } });
           toast.success("Sua ficha foi gerada. Revise e salve.");
         }
@@ -334,7 +334,7 @@ function AskPanel({ plan, onBack }: { plan: WorkoutPlan; onBack: () => void }) {
     try {
       const res = await workoutAI({ data: { mode: "ask", questionnaire: null, planId: plan.id, question: question.trim() } });
       await consumeWorkoutAI(res, (event) => {
-        if (typeof event.text === "string") setAnswer((a) => a + (event.text as string));
+        if (typeof event["text"] === "string") setAnswer((a) => a + (event["text"] as string));
       });
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Não foi possível consultar a IA.");
