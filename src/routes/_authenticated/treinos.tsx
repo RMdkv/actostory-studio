@@ -1,15 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Dumbbell } from "lucide-react";
-import { EmptyState } from "@/components/acto/EmptyState";
-import { PageTitle } from "@/components/acto/AppShell";
+import { TreinosApp } from "@/components/acto/workouts/TreinosApp";
 
 export const Route = createFileRoute("/_authenticated/treinos")({
-  head: () => ({ meta: [{ title: "Treinos — ACTO" }] }),
-  component: () => (
-    <>
-      <PageTitle title="Treinos" subtitle="Fichas, exercícios e sessões" />
-      <EmptyState icon={Dumbbell} title="Nenhuma ficha ainda"
-        text="Aqui você vai criar fichas com exercícios, séries, cargas e descanso, e registrar cada sessão. Em construção na próxima etapa." />
-    </>
-  ),
+  head: () => ({
+    meta: [
+      { title: "Treinos — ACTO" },
+      { name: "description", content: "Crie fichas de treino personalizadas com IA, modelos prontos ou do zero, e registre cada sessão no ACTO." },
+      { property: "og:title", content: "Treinos — ACTO" },
+      { property: "og:description", content: "Crie fichas de treino personalizadas com IA, modelos prontos ou do zero, e registre cada sessão no ACTO." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
+  component: TreinosApp,
 });
