@@ -10,6 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { fetchFeed, fetchStories, timeAgo, uploadMedia, type Author } from "@/lib/social";
 import { Avatar } from "./comunidade";
 import { demoPosts } from "@/lib/guest";
+import { WelcomeBanner } from "@/components/acto/WelcomeBanner";
 
 export const Route = createFileRoute("/_authenticated/inicio")({
   head: () => ({ meta: [{ title: "Início — ACTO" }] }),
@@ -47,10 +48,17 @@ function Inicio() {
     }
   }
 
-  if (user.is_anonymous) return <GuestFeed />;
+  if (user.is_anonymous)
+    return (
+      <div className="space-y-6">
+        <WelcomeBanner className="h-auto w-full rounded-3xl shadow-glow" />
+        <GuestFeed />
+      </div>
+    );
 
   return (
     <div className="space-y-6">
+      <WelcomeBanner className="h-auto w-full rounded-3xl shadow-glow" />
       <section aria-label="Stories" className="flex gap-4 overflow-x-auto pb-1">
         <div className="flex shrink-0 flex-col items-center gap-1.5">
           <button type="button" disabled={uploadingStory} onClick={() => storyInput.current?.click()}

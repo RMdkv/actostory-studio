@@ -1,23 +1,33 @@
 import { cn } from "@/lib/utils";
+import emblemAsset from "@/assets/acto-emblem.png.asset.json";
 
-/** Full ACTO logo (symbol + name), cropped from the artwork. */
+/** ACTO logo: the neon "A" medallion on black. Square artwork, scales with the width class passed in. */
 export function ActoLogo({ className }: { className?: string }) {
   return (
-    <div className={cn("relative aspect-[3/2] overflow-hidden", className)}>
-      <img
-        src="/Logotipo_futurista_ACTO_em_neon_verde.png"
-        alt="ACTO"
-        className="absolute left-1/2 top-1/2 w-[160%] max-w-none -translate-x-1/2 -translate-y-1/2"
-      />
-    </div>
+    <img
+      src={emblemAsset.url}
+      alt="ACTO"
+      width={1024}
+      height={1024}
+      className={cn("h-auto w-full rounded-[28%] ring-1 ring-primary/25 shadow-glow", className)}
+    />
   );
 }
 
-/** Compact wordmark for headers. */
+/** Compact lockup for headers: the emblem followed by the ACTO name. */
 export function ActoWordmark({ className }: { className?: string }) {
   return (
-    <span className={cn("font-display text-xl font-bold tracking-[0.18em] text-foreground", className)}>
-      ACT<span className="text-primary">O</span>
+    <span className={cn("flex items-center gap-2", className)}>
+      <img
+        src={emblemAsset.url}
+        alt=""
+        width={1024}
+        height={1024}
+        className="h-7 w-7 shrink-0 rounded-full object-cover ring-1 ring-primary/30"
+      />
+      <span className="font-display text-xl font-bold tracking-[0.18em] text-foreground">
+        ACT<span className="text-primary">O</span>
+      </span>
     </span>
   );
 }
