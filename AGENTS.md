@@ -14,3 +14,4 @@
 - Workout AI runs only through authenticated server functions and server-only Responses helpers, selecting exercises from the shared catalog so generated plans remain editable and illustrated.
 - Guest demo mode uses anonymous Cloud sessions; restrictive RLS (public.is_guest()) blocks guests from social writes and other users' data, and workout AI rejects anonymous claims server-side.
 - RUN mode lives in src/components/acto/run and src/lib/run; Leaflet loads lazily behind ClientOnly with OpenStreetMap tiles (no API key), and runs are stored owner-scoped with guest inserts blocked by RLS.
+- Never list .env in .gitignore: the published build reads the VITE_* backend settings from it (publishable values only).
