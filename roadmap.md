@@ -8,3 +8,7 @@
 # Identidade visual
 - [x] Nova logo ACTO (emblema "A" neon sobre preto) no início, login, cabeçalho e ícones do app
 - [x] Banner de boas-vindas no dashboard ("Olá, atleta!")
+
+# RUN
+- [x] Corrida com GPS real: mapa, trajeto, métricas, pausar/finalizar, resumo
+- [x] Salvar corridas por usuário e histórico "Minhas Corridas" (salvamento em conta cadastrada ainda não testado — sem conta registrada)
