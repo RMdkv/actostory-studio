@@ -213,7 +213,7 @@ export function RunApp({ userId, guest }: { userId: string; guest: boolean }) {
     return (
       <div className="animate-rise space-y-4">
         <div className="text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-strong">Corrida concluída</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Corrida concluída</p>
           <p className="font-display mt-2 text-5xl font-bold tabular-nums">{formatKm(distance)}<span className="ml-1 text-lg text-muted-foreground">km</span></p>
           <p className="mt-1 text-lg tabular-nums">{formatDuration(elapsed)} · {formatPace(avgPace)} min/km</p>
           {startedAt && <p className="mt-1 text-xs text-muted-foreground">{dateFmt.format(startedAt)}</p>}
@@ -336,7 +336,7 @@ function Progress({ runs }: { runs: SavedRun[] }) {
   return (
     <div className="mb-4 rounded-2xl border border-border bg-card p-4">
       <div className="mb-3 flex items-center justify-between">
-        <p className="inline-flex items-center gap-2 text-sm font-semibold"><TrendingUp className="h-4 w-4 text-primary-strong" /> Sua evolução</p>
+        <p className="inline-flex items-center gap-2 text-sm font-semibold"><TrendingUp className="h-4 w-4 text-primary" /> Sua evolução</p>
         <p className="text-xs text-muted-foreground">{formatKm(total)} km no total · {runs.length} corridas</p>
       </div>
       <div className="flex h-20 items-end gap-2">
