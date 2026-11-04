@@ -27,8 +27,8 @@ export default function RunMap({ route, position, follow = true, interactive = t
       zoomControl: false, attributionControl: true,
       dragging: interactive, scrollWheelZoom: interactive, touchZoom: interactive, doubleClickZoom: interactive, boxZoom: false, keyboard: interactive,
     }).setView([-23.55, -46.63], 3);
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-      maxZoom: 19, attribution: '&copy; OpenStreetMap &copy; CARTO',
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19, attribution: '&copy; OpenStreetMap',
     }).addTo(m);
     lines.current = L.layerGroup().addTo(m);
     map.current = m;
@@ -69,5 +69,5 @@ export default function RunMap({ route, position, follow = true, interactive = t
     }
   }, [position, follow]);
 
-  return <div ref={el} className={className} style={{ zIndex: 0 }} />;
+  return <div ref={el} className={`acto-run-map ${className ?? ""}`} style={{ zIndex: 0 }} />;
 }
