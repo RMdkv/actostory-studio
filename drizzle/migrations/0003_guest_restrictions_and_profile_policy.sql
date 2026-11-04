@@ -1,0 +1,11 @@
+DROP POLICY IF EXISTS "Signed-in users can view profiles" ON public.profiles;
+CREATE POLICY "Signed-in users can view profiles" ON public.profiles FOR SELECT TO authenticated USING (auth.uid() IS NOT NULL);
+CREATE POLICY "Guests cannot create profiles" ON public.profiles AS RESTRICTIVE FOR INSERT TO authenticated WITH CHECK (NOT public.is_guest());
+CREATE POLICY "Guests cannot use likes" ON public.post_likes AS RESTRICTIVE FOR DELETE TO authenticated USING (NOT public.is_guest());
+CREATE POLICY "Guests cannot see posts" ON public.posts AS RESTRICTIVE FOR SELECT TO authenticated USING (NOT public.is_guest());
+CREATE POLICY "Guests cannot see stories" ON public.stories AS RESTRICTIVE FOR SELECT TO authenticated USING (NOT public.is_guest());
+CREATE POLICY "Guests cannot delete stories" ON public.stories AS RESTRICTIVE FOR DELETE TO authenticated USING (NOT public.is_guest());
+CREATE POLICY runs_no_guest ON public.runs AS RESTRICTIVE FOR ALL TO authenticated USING (NOT public.is_guest()) WITH CHECK (NOT public.is_guest());
+CREATE POLICY workout_ai_access_no_guest ON public.workout_ai_access AS RESTRICTIVE FOR SELECT TO authenticated USING (NOT public.is_guest());
+CREATE POLICY workout_plans_no_guest ON public.workout_plans AS RESTRICTIVE FOR ALL TO authenticated USING (NOT public.is_guest()) WITH CHECK (NOT public.is_guest());
+CREATE POLICY workout_sessions_no_guest ON public.workout_sessions AS RESTRICTIVE FOR ALL TO authenticated USING (NOT public.is_guest()) WITH CHECK (NOT public.is_guest());
