@@ -112,6 +112,51 @@ export type Database = {
         }
         Relationships: []
       }
+      runs: {
+        Row: {
+          active_seconds: number
+          avg_pace_s_per_km: number | null
+          avg_speed_kmh: number | null
+          best_pace_s_per_km: number | null
+          calories: number
+          created_at: string
+          distance_m: number
+          finished_at: string
+          id: string
+          route: Json
+          started_at: string
+          user_id: string
+        }
+        Insert: {
+          active_seconds: number
+          avg_pace_s_per_km?: number | null
+          avg_speed_kmh?: number | null
+          best_pace_s_per_km?: number | null
+          calories?: number
+          created_at?: string
+          distance_m: number
+          finished_at: string
+          id?: string
+          route?: Json
+          started_at: string
+          user_id?: string
+        }
+        Update: {
+          active_seconds?: number
+          avg_pace_s_per_km?: number | null
+          avg_speed_kmh?: number | null
+          best_pace_s_per_km?: number | null
+          calories?: number
+          created_at?: string
+          distance_m?: number
+          finished_at?: string
+          id?: string
+          route?: Json
+          started_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       stories: {
         Row: {
           author_id: string
